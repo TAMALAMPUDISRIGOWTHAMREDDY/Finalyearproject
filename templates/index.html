@@ -1,19 +1,64 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ePharma</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
-    <h1>Welcome to ePharma</h1>
-    <form method="POST">
-        <label>Name: <input type="text" name="name" required></label><br>
-        <label>Age: <input type="number" name="age" required></label><br>
-        <label>Symptoms: <input type="text" name="symptoms" required></label><br>
-        <button type="submit">Find Medicine</button>
+    <h1 id="Heading">Welcome to ePharma</h1>
+    
+    <!-- Display Error Message -->
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" onsubmit="debugForm()">
+        <label for="sex">
+            <p>Sex:</p>
+            <select class="inp" name="Gender" id="sex" required>
+                <option value="" disabled selected>Select</option>
+                <option value="Male" {% if gender=="Male" %}selected{% endif %}>Male</option>
+                <option value="Female" {% if gender=="Female" %}selected{% endif %}>Female</option>
+            </select>
+        </label>
+
+        <label>
+            <p>Age:</p>
+            <input class="inp" type="number" name="age" value="{{ age }}" required>
+        </label>
+
+        <label id="search">
+            <p>Symptoms:</p>
+            <input id="sea" type="text" name="symptoms" value="{{ symptoms }}" required>
+        </label>
+
+        <button class="sub" type="submit">Find Medicine</button>
     </form>
+
+    <div class="emergency" id="Guide">
+        <h1 class="now">Emergency Guides</h1>
+        <p class="now">If you need further assistance, check out the following first aid guides:</p>
+        <ul>
+            <li><a href="/cpr"><img src="{{ url_for('static', filename='images/cpr.jpg') }}" alt="CPR"><figcaption>CPR</figcaption></a></li>
+            <li><a href="/snake_bites"><img src="{{ url_for('static', filename='images/snake_bite.jpg') }}" alt="Snake Bite"><figcaption>Snake Bite</figcaption></a></li>
+            <li><a href="/fire_accidents"><img src="{{ url_for('static', filename='images/fire_accident.jpg') }}" alt="Fire Accident"><figcaption>Fire Accident</figcaption></a></li>
+            <li><a href="/electric_shocks"><img src="{{ url_for('static', filename='images/electric_shock.jpg') }}" alt="Electric Shock"><figcaption>Electric Shock</figcaption></a></li>
+        </ul>
+    </div>
+
+    <article>
+        <h6>Disclaimer: Please Consult a Doctor As Well</h6>
+    </article>
+
+    <script>
+        function debugForm() {
+            let ageValue = document.querySelector('input[name="age"]').value;
+            console.log("Debug: Age Entered ->", ageValue);
+        }
+    </script>
+
 </body>
 </html>

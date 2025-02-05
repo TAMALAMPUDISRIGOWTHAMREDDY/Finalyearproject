@@ -3,24 +3,27 @@
 <head>
     <title>ePharma - Medication Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
     <h1>Medication Recommendation</h1>
-    <p><strong>Name:</strong> {{ name }}</p>
+
+    <p><strong>Gender:</strong> {{ gender }}</p>
     <p><strong>Age:</strong> {{ age }}</p>
     <p><strong>Symptoms:</strong> {{ symptoms }}</p>
+
     <h2>Recommended Medicine:</h2>
     <p>{{ medicine }}</p>
 
     <h3>First Aid Guides</h3>
-    <p>If you need further assistance, check out the following first aid guides:</p>
     <ul>
         <li><a href="/cpr">CPR</a></li>
         <li><a href="/snake_bites">Snake Bites</a></li>
         <li><a href="/fire_accidents">Fire Accidents</a></li>
         <li><a href="/electric_shocks">Electric Shocks</a></li>
     </ul>
-    <br><a href="/">Back to Home</a>
+    
+    <br>
+    <a href="/">Back to Home</a>
 </body>
 </html>
